@@ -1,4 +1,4 @@
-import { Html, OrbitControls, PerspectiveCamera, View } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, View } from '@react-three/drei';
 import { RefObject, Dispatch, SetStateAction, Suspense } from 'react';
 import { Group } from 'three';
 import { Object3DEventMap } from 'three';
@@ -6,6 +6,7 @@ import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Lights from './Lights';
 import Iphone from './Iphone';
 import * as THREE from 'three';
+import Loader from './Loader';
 interface ModelViewProps {
     index: number;
     groupRef: RefObject<Group<Object3DEventMap>>;
@@ -45,7 +46,7 @@ const ModelView: React.FC<ModelViewProps> = ({ index, groupRef, gsapType, contro
             />
 
             <group ref={groupRef} name={`${index === 1} ? 'small' : 'large'`} position={[0, 0, 0]}>
-                <Suspense fallback={<Html><div>Loading</div></Html>}>
+                <Suspense fallback={<Loader />}>
                     <Iphone
                         scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
                         item={item}

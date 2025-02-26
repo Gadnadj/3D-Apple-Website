@@ -1,11 +1,16 @@
-import React from 'react'
+import { Html } from '@react-three/drei';
 
-type Props = {}
 
-const Loader = (props: Props) => {
-  return (
-    <div>Loader</div>
-  )
-}
+const Loader = () => {
+    return (
+        <Html>
+            <div className='absolute top-0 left-0 w-full h-full flex justify-center items-center'>
+                <div className='w-[10vh] h-[10vh] rounded-full'>
+                    Loading...
+                </div>
+            </div>
+        </Html>
+    );
+};
 
-export default Loader
+export default Loader;

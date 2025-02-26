@@ -1,12 +1,14 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ModelView from './ModelView';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { yellowImg } from '../utils';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
-import { View, OrbitControls } from '@react-three/drei';
+import { View } from '@react-three/drei';
 import { models, sizes } from '../constants';
+import { animateWithGsapTimeline } from '../utils/animations';
+import { transform } from 'typescript';
 
 const Model = () => {
     useGSAP(() => {
@@ -36,6 +38,38 @@ const Model = () => {
     //rotation value
     const [smallRotation, setSmallRotation] = useState(0);
     const [largeRotation, setLargeRotation] = useState(0);
+
+    const tl = gsap.timeline();
+
+    useEffect(() => {
+        if (size === 'large') {
+            animateWithGsapTimeline({
+                timeline: tl,
+                modelRef: small,
+                rotation: smallRotation,
+                firstView: '#view1',
+                secondView: '#view2',
+                style: {
+                    transform: 'translateX(-100%)',
+                    duration: 2
+                }
+            });
+        }
+
+        if (size === 'small') {
+            animateWithGsapTimeline({
+                timeline: tl,
+                modelRef: large,
+                rotation: largeRotation,
+                firstView: '#view2',
+                secondView: '#view1',
+                style: {
+                    transform: 'translateX(0)',
+                    duration: 2
+                }
+            });
+        }
+    }, [size]);
 
 
     return (
