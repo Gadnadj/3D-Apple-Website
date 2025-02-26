@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { yellowImg } from '../utils';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
-import { View } from '@react-three/drei';
+import { View, OrbitControls } from '@react-three/drei';
 import { models, sizes } from '../constants';
 
 const Model = () => {
@@ -25,8 +25,8 @@ const Model = () => {
     });
 
     //camera control for the model view
-    const cameraControlSmall = useRef();
-    const cameraControlLarge = useRef();
+    const cameraControlSmall = useRef<any>(null);
+    const cameraControlLarge = useRef<any>(null);
 
 
     //model
